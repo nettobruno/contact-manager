@@ -28,7 +28,7 @@ export default function Login() {
             Acessar conta
           </h2>
 
-          <form className="flex flex-col">
+          <form className="flex flex-col gap-3">
             <Input
               id="email"
               type="email"
@@ -43,7 +43,7 @@ export default function Login() {
               placeholder="Digite sua senha"
             />
 
-            <div className="self-end mt-3">
+            <div className="self-end mt-4">
               <Button type="submit" variant="primary">
                 Acessar Conta
               </Button>
