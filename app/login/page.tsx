@@ -39,7 +39,7 @@ export default function Login() {
         <div className="absolute top-4 inset-x-0 px-6 md:top-8 md:px-16">
           <p className="text-white text-right text-sm md:text-base">
             Não tem uma conta?{" "}
-            <Link href="/register" className="text-lime-300 font-semibold">
+            <Link href="/register" className="text-lime-300 font-bold">
               Criar conta
             </Link>
           </p>
