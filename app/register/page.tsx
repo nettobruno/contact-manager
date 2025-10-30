@@ -1,9 +1,38 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { Input } from "@/components/Input";
 import { Button } from "@/components/Button";
+import { useState } from "react";
+import { XCircle } from "lucide-react";
+import { validateRegister } from "@/utils/validation";
 
 export default function Register() {
+  const [loading, setLoading] = useState(false);
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errors, setErrors] = useState<string[]>([]);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+
+    const newErrors = validateRegister({
+      nome,
+      email,
+      password,
+      confirmPassword,
+    });
+    setErrors(newErrors);
+    if (newErrors.length > 0) return;
+
+    setLoading(true);
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    setLoading(false);
+    alert("Conta criada com sucesso!");
+  }
+
   return (
     <div className="grid min-h-screen md:grid-cols-[2fr_1fr]">
       <div
@@ -28,12 +57,14 @@ export default function Register() {
             Criar conta
           </h2>
 
-          <form className="flex flex-col gap-3">
+          <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
             <Input
               id="nome"
               type="text"
               label="Nome"
               placeholder="Como você se chama?"
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
             />
 
             <Input
@@ -41,6 +72,8 @@ export default function Register() {
               type="email"
               label="E-mail"
               placeholder="Seu e-mail aqui"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
 
             <Input
@@ -48,6 +81,8 @@ export default function Register() {
               type="password"
               label="Senha"
               placeholder="Digite sua senha"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
 
             <Input
@@ -55,11 +90,27 @@ export default function Register() {
               type="password"
               label="Repetir senha"
               placeholder="Repita sua senha"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
+
+            {errors.length > 0 && (
+              <div className="mt-2 flex flex-col gap-1">
+                {errors.map((err, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-2 text-red-400 text-sm"
+                  >
+                    <XCircle size={16} />
+                    <span>{err}</span>
+                  </div>
+                ))}
+              </div>
+            )}
 
             <div className="self-end mt-4">
               <Button type="submit" variant="primary">
-                Criar conta
+                {loading ? "Criando..." : "Criar conta"}
               </Button>
             </div>
           </form>
