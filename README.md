@@ -7,6 +7,7 @@
 [![Husky](https://img.shields.io/badge/Husky-000000?style=for-the-badge&logo=husky&logoColor=white)](https://typicode.github.io/husky/#/)
 [![Commitlint](https://img.shields.io/badge/Commitlint-000000?style=for-the-badge&logo=commitlint&logoColor=white)](https://commitlint.js.org/)
 [![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=white)](https://prettier.io/)
+[![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
 
 **Contact Manager** é um projeto de frontend para controle de contatos, desenvolvido com **Next.js**, **React**, **TypeScript** e **Tailwind CSS**.  
 O projeto segue o design definido no [Figma](https://www.figma.com/design/1xoHhvXTjn55iqzHFb3XNO/Gerenciador-de-contatos--Community-?node-id=3106-396&t=3QSy66fz2WEdk00J-1).
@@ -19,10 +20,12 @@ Inclui validação de formulários, mensagens de erro padronizadas, componentes 
 
 - **Front-end:** React, Next.js, TypeScript, Tailwind CSS
 - **Padronização de commits:** Husky + Commitlint
+- **Banco de dados:** Firebase
 
 ---
 
 ## 📸 Screenshots
+
 Login:
 <img width="1366" height="768" alt="login" src="https://github.com/user-attachments/assets/5bf3c05d-dfdc-4b25-ab08-497d89fcc6e3" />
 
@@ -55,7 +58,26 @@ npm run dev
 
 Abra http://localhost:3000 no navegador.
 
-📦 Commits
+---
+
+## 🔐 Configuração do ambiente (.env)
+
+Crie um arquivo .env.local na raiz do projeto com suas chaves do Firebase:
+
+```bash
+NEXT_PUBLIC_FIREBASE_API_KEY=
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
+NEXT_PUBLIC_FIREBASE_APP_ID=
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=
+```
+
+---
+
+## 📦 Commits
+
 Este projeto segue Commitlint com convenção Conventional Commits e usa Husky para pré-validar mensagens.
 
 Para criar commits padronizados, basta rodar:
