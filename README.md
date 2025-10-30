@@ -23,11 +23,11 @@ Inclui validação de formulários, mensagens de erro padronizadas, componentes 
 ---
 
 ## 📸 Screenshots
+Login:
+<img width="1366" height="768" alt="login" src="https://github.com/user-attachments/assets/5bf3c05d-dfdc-4b25-ab08-497d89fcc6e3" />
 
-Layout responsivo e mensagens de validação consistentes:
-
-![Login](https://user-images.githubusercontent.com/SEU_USUARIO/screenshots/login.png)  
-![Register](https://user-images.githubusercontent.com/SEU_USUARIO/screenshots/register.png)
+Register:
+<img width="1366" height="768" alt="register" src="https://github.com/user-attachments/assets/ff42d2bb-59a1-405f-8ce2-2e0fb14c898b" />
 
 ---
 
