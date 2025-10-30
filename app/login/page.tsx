@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Input } from "@/components/Input";
+import { Button } from "@/components/Button";
 
 export default function Login() {
   return (
@@ -27,41 +29,25 @@ export default function Login() {
           </h2>
 
           <form className="flex flex-col">
-            <div className="flex flex-col mb-5">
-              <label htmlFor="email" className="font-semibold text-white mb-1">
-                E-mail
-              </label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="Digite seu e-mail"
-                className="border border-neutral-700 px-3 py-2 rounded-lg bg-transparent text-white placeholder-neutral-500 focus:outline-none focus:border-lime-300"
-              />
-            </div>
+            <Input
+              id="email"
+              type="email"
+              label="E-mail"
+              placeholder="Digite seu e-mail"
+            />
 
-            <div className="flex flex-col mb-5">
-              <label
-                htmlFor="password"
-                className="font-semibold text-white mb-1"
-              >
-                Senha
-              </label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Digite sua senha"
-                className="border border-neutral-700 px-3 py-2 rounded-lg bg-transparent text-white placeholder-neutral-500 focus:outline-none focus:border-lime-300"
-              />
-            </div>
+            <Input
+              id="password"
+              type="password"
+              label="Senha"
+              placeholder="Digite sua senha"
+            />
 
-            <button
-              type="submit"
-              className="text-black bg-lime-300 p-3 rounded-xl w-fit self-end font-bold hover:cursor-pointer hover:bg-lime-400 transition-colors"
-            >
-              Acessar Conta
-            </button>
+            <div className="self-end mt-3">
+              <Button type="submit" variant="primary">
+                Acessar Conta
+              </Button>
+            </div>
           </form>
         </div>
       </div>
