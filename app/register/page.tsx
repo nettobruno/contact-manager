@@ -6,18 +6,24 @@ import { Button } from "@/components/Button";
 import { useState } from "react";
 import { XCircle } from "lucide-react";
 import { validateRegister } from "@/utils/validation";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from "@/lib/firebase";
+import { useRouter } from "next/navigation";
+import { useRedirectIfAuthenticated } from "@/hooks/useRedirectIfAuthenticated";
 
 export default function Register() {
+  useRedirectIfAuthenticated();
+
   const [loading, setLoading] = useState(false);
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
+  const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-
     const newErrors = validateRegister({
       nome,
       email,
@@ -26,11 +32,16 @@ export default function Register() {
     });
     setErrors(newErrors);
     if (newErrors.length > 0) return;
-
-    setLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setLoading(false);
-    alert("Conta criada com sucesso!");
+    try {
+      setLoading(true);
+      const cred = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(cred.user, { displayName: nome });
+      router.push("/dashboard");
+    } catch (error: any) {
+      setErrors(["Erro ao criar conta, tente novamente"]);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -41,7 +52,6 @@ export default function Register() {
       >
         <Image alt="Logo" src="/images/logo.svg" width={132} height={32} />
       </div>
-
       <div className="bg-neutral-900 flex flex-col justify-center px-6 py-10 md:px-16 relative">
         <div className="absolute top-4 inset-x-0 px-6 md:top-8 md:px-16">
           <p className="text-white text-right text-sm md:text-base">
@@ -51,12 +61,10 @@ export default function Register() {
             </Link>
           </p>
         </div>
-
         <div className="mt-10 md:mt-0">
           <h2 className="text-white text-2xl md:text-3xl mb-5 font-semibold">
             Criar conta
           </h2>
-
           <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
             <Input
               id="nome"
@@ -66,7 +74,6 @@ export default function Register() {
               value={nome}
               onChange={(e) => setNome(e.target.value)}
             />
-
             <Input
               id="email"
               type="email"
@@ -75,7 +82,6 @@ export default function Register() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-
             <Input
               id="password"
               type="password"
@@ -84,7 +90,6 @@ export default function Register() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-
             <Input
               id="confirmPassword"
               type="password"
@@ -93,7 +98,6 @@ export default function Register() {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-
             {errors.length > 0 && (
               <div className="mt-2 flex flex-col gap-1">
                 {errors.map((err, i) => (
@@ -107,7 +111,6 @@ export default function Register() {
                 ))}
               </div>
             )}
-
             <div className="self-end mt-4">
               <Button type="submit" variant="primary">
                 {loading ? "Criando..." : "Criar conta"}
